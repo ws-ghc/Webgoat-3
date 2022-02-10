@@ -53,7 +53,7 @@ public class SqlInjectionLesson5b extends AssignmentEndpoint {
     }
 
     protected AttackResult injectableQuery(String login_count, String accountName) {
-        String queryString = "SELECT * From user_data WHERE Login_Count = ? and userid= " + accountName;
+        String queryString = "SELECT * From user_data WHERE Login_Count = ? and userid= ?";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement query = connection.prepareStatement(queryString, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -66,6 +66,7 @@ public class SqlInjectionLesson5b extends AssignmentEndpoint {
             }
 
             query.setInt(1, count);
+            query.setString(2, accountName);
             //String query = "SELECT * FROM user_data WHERE Login_Count = " + login_count + " and userid = " + accountName, ;
             try {
                 ResultSet results = query.executeQuery();
