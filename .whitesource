@@ -17,6 +17,8 @@
   "remediateSettings": {
     "workflowRules": {
       "enabled": true
+
+
     }
   }
 }
